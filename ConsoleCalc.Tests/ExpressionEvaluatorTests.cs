@@ -53,12 +53,12 @@ public class ExpressionEvaluatorTests
         var exception = Assert.Throws<ArgumentException>(() => _evaluator.Evaluate(expression));
         Assert.Contains(expectedErrorMessage, exception.Message);
     }
-
-    [Fact]
-    public void Evaluate_DivisionByZero_ThrowsException()
+    
+    [Theory]
+    [InlineData("10 / 0", "Division by zero")]
+    public void Evaluate_DivisionByZero_ThrowsException(string expression, string expectedErrorMessage)
     {
-        var expression = "10 / 0";
         var exception = Assert.Throws<ArgumentException>(() => _evaluator.Evaluate(expression));
-        Assert.Contains("Division by zero", exception.Message);
+        Assert.Contains(expectedErrorMessage, exception.Message);
     }
 }
