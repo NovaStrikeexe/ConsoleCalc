@@ -2,5 +2,8 @@
 
 public interface IOperation
 {
-    double Calculate(double left, double right);
+    double Calculate(double leftOperand, double rightOperand);
+
+    int Precedence { get; }
 }
+

@@ -1,9 +1,10 @@
-﻿using ConsoleCalc.Services.Interfaces;
+﻿namespace ConsoleCalc.Services.Implementation;
 
-namespace ConsoleCalc.Services.Implementation;
-
-public class Subtraction : IOperation
+public class Subtraction : OperationBase
 {
-    public double Calculate(double left, double right) 
-        => left - right;
+    public override double Calculate(double leftOperand, double rightOperand) 
+        => leftOperand - rightOperand;
+     
+     public override int Precedence 
+         => 1;
 }
