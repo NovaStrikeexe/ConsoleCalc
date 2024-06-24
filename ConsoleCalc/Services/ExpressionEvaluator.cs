@@ -4,18 +4,13 @@ using ConsoleCalc.Services.Interfaces;
 
 public class ExpressionEvaluator
 {
-    private readonly Dictionary<char, IOperation> operations;
-
-    public ExpressionEvaluator()
+    private readonly Dictionary<char, IOperation> operations = new()
     {
-        operations = new Dictionary<char, IOperation>
-        {
-            {'+', new Addition()},
-            {'-', new Subtraction()},
-            {'*', new Multiplication()},
-            {'/', new Division()}
-        };
-    }
+        {'+', new Addition()},
+        {'-', new Subtraction()},
+        {'*', new Multiplication()},
+        {'/', new Division()}
+    };
 
     public double Evaluate(string expression)
     {

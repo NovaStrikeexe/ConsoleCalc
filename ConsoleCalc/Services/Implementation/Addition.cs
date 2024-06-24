@@ -1,6 +1,4 @@
-﻿using ConsoleCalc.Services.Interfaces;
-
-namespace ConsoleCalc.Services.Implementation;
+﻿namespace ConsoleCalc.Services.Implementation;
 
 public class Addition : OperationBase
 {
