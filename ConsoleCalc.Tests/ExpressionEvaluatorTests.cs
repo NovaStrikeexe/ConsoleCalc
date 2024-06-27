@@ -1,8 +1,24 @@
-﻿namespace ConsoleCalc.Tests;
+﻿using ConsoleCalc.Services;
+using ConsoleCalc.Services.Implementation;
+
+namespace ConsoleCalc.Tests;
 
 public class ExpressionEvaluatorTests
 {
     private readonly ExpressionEvaluator _evaluator = new();
+
+    public ExpressionEvaluatorTests()
+    {
+        RegisterOperations();
+    }
+
+    private void RegisterOperations()
+    {
+        OperationFactory.RegisterOperation(new Addition());
+        OperationFactory.RegisterOperation(new Subtraction());
+        OperationFactory.RegisterOperation(new Multiplication());
+        OperationFactory.RegisterOperation(new Division());
+    }
 
     [Theory]
     [InlineData("1+2", 3)]
@@ -53,7 +69,7 @@ public class ExpressionEvaluatorTests
         var exception = Assert.Throws<ArgumentException>(() => _evaluator.Evaluate(expression));
         Assert.Contains(expectedErrorMessage, exception.Message);
     }
-    
+        
     [Theory]
     [InlineData("10 / 0", "Division by zero")]
     public void Evaluate_DivisionByZero_ThrowsException(string expression, string expectedErrorMessage)

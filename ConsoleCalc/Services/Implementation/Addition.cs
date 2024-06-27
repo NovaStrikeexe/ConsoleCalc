@@ -1,10 +1,15 @@
-﻿namespace ConsoleCalc.Services.Implementation;
+﻿using ConsoleCalc.Services.Interfaces;
 
-public class Addition : OperationBase
+namespace ConsoleCalc.Services.Implementation;
+
+public class Addition : IOperation
 {
-    public override double Calculate(double leftOperand, double rightOperand) 
-        => leftOperand + rightOperand;
+    public double Calculate(double left, double right) 
+        => left + right;
     
-    public override int Precedence 
+    public int Precedence 
         => 1;
+    
+    public char Operator 
+        => '+';
 }

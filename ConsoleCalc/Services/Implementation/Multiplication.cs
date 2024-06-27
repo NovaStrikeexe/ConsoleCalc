@@ -1,10 +1,15 @@
-﻿namespace ConsoleCalc.Services.Implementation;
+﻿using ConsoleCalc.Services.Interfaces;
 
-public class Multiplication : OperationBase
+namespace ConsoleCalc.Services.Implementation;
+
+public class Multiplication : IOperation
 {
-    public override double Calculate(double leftOperand, double rightOperand) 
-        => leftOperand * rightOperand;
+    public double Calculate(double left, double right) 
+        => left * right;
     
-    public override int Precedence 
+    public int Precedence 
         => 2;
+    
+    public char Operator 
+        => '*';
 }

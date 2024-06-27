@@ -1,20 +1,35 @@
 ﻿using ConsoleCalc.Services;
+using ConsoleCalc.Services.Implementation;
 
-class Program
+namespace ConsoleCalc
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Введите выражение:");
-        var expression = Console.ReadLine();
-        var evaluator = new ExpressionEvaluator();
-        try
+        static void Main(string[] args)
         {
-            var result = evaluator.Evaluate(expression);
-            Console.WriteLine($"Результат: {result}");
+            RegisterOperations();
+
+            Console.WriteLine("Введите выражение:");
+            var input = Console.ReadLine();
+
+            try
+            {
+                var evaluator = new ExpressionEvaluator();
+                var result = evaluator.Evaluate(input);
+                Console.WriteLine($"Результат: {result}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
         }
-        catch (Exception ex)
+
+        private static void RegisterOperations()
         {
-            Console.WriteLine($"Ошибка: {ex.Message}");
+            OperationFactory.RegisterOperation(new Addition());
+            OperationFactory.RegisterOperation(new Subtraction());
+            OperationFactory.RegisterOperation(new Multiplication());
+            OperationFactory.RegisterOperation(new Division());
         }
     }
 }
