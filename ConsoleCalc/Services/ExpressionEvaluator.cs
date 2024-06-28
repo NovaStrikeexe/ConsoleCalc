@@ -31,28 +31,31 @@ public class ExpressionEvaluator
                 }
                 operatorStack.Push(token);
             }
-            else if (token == "(")
+            else switch (token)
             {
-                operatorStack.Push(token);
-            }
-            else if (token == ")")
-            {
-                while (operatorStack.Count > 0 && operatorStack.Peek() != "(")
+                case "(":
+                    operatorStack.Push(token);
+                    break;
+                case ")":
                 {
-                    outputQueue.Enqueue(operatorStack.Pop());
+                    while (operatorStack.Count > 0 && operatorStack.Peek() != "(")
+                    {
+                        outputQueue.Enqueue(operatorStack.Pop());
+                    }
+                    if (operatorStack.Count == 0 || operatorStack.Peek() != "(")
+                    {
+                        throw new ArgumentException("Mismatched parentheses.");
+                    }
+                    operatorStack.Pop();
+                    break;
                 }
-                if (operatorStack.Count == 0 || operatorStack.Peek() != "(")
-                {
-                    throw new ArgumentException("Mismatched parentheses.");
-                }
-                operatorStack.Pop();
             }
         }
 
         while (operatorStack.Count > 0)
         {
             var op = operatorStack.Pop();
-            if (op == "(" || op == ")")
+            if (op is "(" or ")")
             {
                 throw new ArgumentException("Mismatched parentheses.");
             }

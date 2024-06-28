@@ -26,4 +26,3 @@ public static class OperationFactory
         => operations[op1].Precedence > operations[op2].Precedence;
     
 }
-
